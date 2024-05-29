@@ -1,0 +1,39 @@
+/****** FORM LOGIN ******/
+body {
+  min-height: 100vh;
+}
+.login {
+  display: flex;
+  flex-direction: column;
+  max-width: 380px;
+  align-items: center;
+  margin: 150px auto 0;
+}
+.login form {
+  display: flex;
+  flex-direction: column;
+  margin: 38px 0 28px;
+  width: 100%;
+}
+.login label {
+  margin-bottom: 7px;
+}
+.login input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding: 0 10px;
+}
+.login:nth-child(1) input {
+  margin-bottom: 15px;
+}
+.login a {
+  text-decoration: underline;
+}
+.login p {
+  color: red;
+}
+.login:nth-child(1) p {
+  margin-bottom: 15px;
+}
