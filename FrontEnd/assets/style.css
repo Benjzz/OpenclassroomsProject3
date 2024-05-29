@@ -186,3 +186,35 @@ footer nav ul {
   justify-content: flex-end;
   padding: 20px 0;
 }
+
+/********************** CATEGORIES **********************/
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+.filter-btn {
+  padding: 9px 10px;
+  min-width: 100px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+  background: none;
+  border: 1px solid #1d6154;
+  font-family: 'Syne';
+  font-size: 16px;
+  color: #1d6154;
+  font-weight: 700;
+  cursor: pointer;
+}
+.filter-btn:hover {
+  color: #ffffff;
+  background: #1d6154;
+}
+.active {
+  color: #ffffff;
+  background: #1d6154;
+}

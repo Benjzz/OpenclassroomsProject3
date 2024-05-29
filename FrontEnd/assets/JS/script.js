@@ -36,4 +36,50 @@ async function createWork(work) {
   workElement.appendChild(titleElement);
 }
 
+// Affichage des categories
+async function displayCategory() {
+  const categories = await getCategories();
+
+  categories.forEach((category) => {
+    const categoriesContainer = document.querySelector('.categories');
+
+    const btnCategory = document.createElement('button');
+    btnCategory.classList.add('filter-btn');
+    btnCategory.innerText = category.name;
+    btnCategory.dataset.id = category.id;
+
+    categoriesContainer.appendChild(btnCategory);
+  });
+}
+
+// Filtre des projets
+async function filterCategories() {
+  const works = await getWorks();
+
+  const buttons = document.querySelectorAll('.filter-btn');
+  buttons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      gallery.innerHTML = '';
+
+      if (button.dataset.id !== '0') {
+        const worksFilter = works.filter((work) => {
+          return work.categoryId == button.dataset.id;
+        });
+        worksFilter.forEach((work) => {
+          createWork(work);
+        });
+      } else {
+        displayWorks();
+      }
+
+      buttons.forEach((button) => {
+        button.classList.remove('active');
+      });
+      button.classList.add('active');
+    });
+  });
+}
+
 displayWorks();
+displayCategory();
+filterCategories();
