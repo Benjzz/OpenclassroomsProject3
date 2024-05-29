@@ -83,3 +83,25 @@ async function filterCategories() {
 displayWorks();
 displayCategory();
 filterCategories();
+
+// Changement admin
+
+function adminMode() {
+  const logBtn = document.querySelector('.log-btn');
+  const categories = document.querySelector('.categories');
+  const adminHeader = document.querySelector('.admin-header');
+  const header = document.querySelector('header');
+
+  if (localStorage.getItem('token')) {
+    categories.style.display = 'none';
+    logBtn.innerText = 'logout';
+    adminHeader.style.display = 'flex';
+    header.style.paddingTop = '106px';
+  } else {
+    categories.style.display = 'flex';
+    logBtn.innerText = 'login';
+    adminHeader.style.display = 'none';
+    header.style.paddingTop = '50px';
+  }
+}
+adminMode();
