@@ -129,7 +129,7 @@ li a:hover {
 }
 #portfolio h2 {
   text-align: center;
-  margin-bottom: 1em;
+  margin: 90px 0 50px;
 }
 .gallery {
   width: 100%;
@@ -224,4 +224,23 @@ footer nav ul {
 .active {
   color: #ffffff;
   background: #1d6154;
+}
+
+/************* BARRE ADMIN ************/
+.admin-header {
+  background-color: #000000;
+  width: 100%;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+}
+
+.edit-mode {
+  display: flex;
+  column-gap: 10px;
+  padding: 20px;
+  font-family: 'Work Sans';
+  font-size: 16px;
 }
