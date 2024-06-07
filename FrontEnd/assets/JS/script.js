@@ -6,12 +6,14 @@ async function getWorks() {
   const reponse = await fetch('http://localhost:5678/api/works');
   return await reponse.json();
 }
+getWorks();
 
 // Recuperation des categories
 async function getCategories() {
   const reponse = await fetch('http://localhost:5678/api/categories');
   return await reponse.json();
 }
+getCategories();
 
 // Affichage des projects //
 async function displayWorks() {

@@ -9,15 +9,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/a9fc624c1f.js" crossorigin="anonymous"></script>
     <meta name="description" content="" />
-    <link rel="stylesheet" href="./assets/style.css" />
-    <link rel="stylesheet" href="./assets/modal.css" />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+    <link rel="stylesheet" href="./assets/styles/modal.css" />
     <script src="./assets/JS/script.js" defer></script>
+    <script src="./assets/JS/modale.js" defer></script>
   </head>
   <body>
     <!--   AJOUT ADMIN   -->
     <aside class="admin-header" style="display: flex">
       <p class="edit-mode"><i class="fa-regular fa-pen-to-square"></i>Mode édition</p>
     </aside>
+    <aside class="modal" style="display: none">
+      <div class="modal-wrapper" id="deleteGallery">
+        <div class="modal-icons"><i class="fa-solid fa-xmark" id="closeModal"></i></div>
+        <div class="modal-content">
+          <h2 class="modal-title">Galerie photo</h2>
+          <div class="modal-gallery">
+            <!-- Ajout des projects de facon dynamique -->
+          </div>
+          <div class="form-line"></div>
+          <button class="modal-btn">Ajouter une photo</button>
+        </div>
+      </div>
+    </aside>
+    <aside class="modal" style="display: none">
+      <div class="modal-wrapper" id="addWork" style="display: block">
+        <div class="modal-icons"><i class="fa-solid fa-arrow-left"></i><i class="fa-solid fa-xmark"></i></div>
+        <h2 class="modal-title">Ajout photo</h2>
+        <div class="modal-content">
+          <form action="">
+            <div class="add-work">
+              <i class="fa-regular fa-image"></i>
+              <label for="file">+ Ajouter photo</label>
+              <input type="file" id="file" value="" style="display: none" aria-hidden="true" accept=".png, .jpg" required />
+              <p>jpg, png : 4mo max</p>
+            </div>
+            <label for="title">Titre</label>
+            <input type="text" id="title" name="title" required />
+            <label for="selectCategory">Catégorie</label>
+            <select name="selectCategory" id="selectCategory"></select>
+            <div class="form-line"></div>
+            <input type="submit" value="Valider" />
+          </form>
+        </div>
+      </div>
+    </aside>
+    <!--   AJOUT ADMIN FIN   -->
 
     <header>
       <a href="./index.html">
@@ -44,17 +81,17 @@
           <p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
         </article>
       </section>
-
       <section id="portfolio">
-        <h2>Mes Projets</h2>
+        <div class="projet-title">
+          <h2>Mes Projets</h2>
+          <p class="projet-edit"><i class="fa-regular fa-pen-to-square"></i> modifier</p>
+        </div>
+
         <div class="categories">
           <button data-id="0" class="filter-btn active">Tous</button>
         </div>
-        <div class="gallery">
-          <!--   Ajout des projets de façon dynamique   -->
-        </div>
+        <div class="gallery"></div>
       </section>
-
       <section id="contact">
         <h2>Contact</h2>
         <p>Vous avez un projet ? Discutons-en !</p>
@@ -73,23 +110,9 @@
     <footer>
       <nav>
         <ul>
-          <li><a href="#">Mentions Légales</a></li>
+          <li><a href="">Mentions Légales</a></li>
         </ul>
       </nav>
     </footer>
-
-    <aside class="modal-container">
-      <div class="modal-gallery">
-        <span><i class="fa-solid fa-xmark"></i></span>
-        <div class="modal-content">
-          <h2 class="modal-title">Galerie photo</h2>
-          <div class="modal-work">
-            <!--   Ajout des projets de façon dynamique   -->
-          </div>
-          <span class="form-line"></span>
-          <button class="modal-btn">Ajouter une photo</button>
-        </div>
-      </div>
-    </aside>
   </body>
 </html>

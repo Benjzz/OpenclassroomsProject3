@@ -29,9 +29,6 @@ section {
 body {
   line-height: 1;
 }
-a {
-  color: black;
-}
 ol,
 ul {
   list-style: none;
@@ -88,6 +85,12 @@ h2 {
   font-size: 30px;
   color: #1d6154;
 }
+a {
+  color: black;
+}
+a:hover {
+  color: #b1663c;
+}
 nav ul {
   display: flex;
   align-items: center;
@@ -101,7 +104,7 @@ nav li {
   font-weight: 600;
 }
 
-li a:hover {
+li:hover {
   color: #b1663c;
 }
 #introduction {
@@ -129,14 +132,20 @@ li a:hover {
 }
 #portfolio h2 {
   text-align: center;
-  margin: 90px 0 50px;
+  padding-top: 90px;
+  margin-bottom: 50px;
 }
+.projet-title {
+  display: flex;
+}
+
 .gallery {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
+  padding-top: 50px;
 }
 
 .gallery img {
@@ -182,24 +191,18 @@ input[type='submit'] {
   width: 180px;
   text-align: center;
   border-radius: 60px;
-  font-size: 14px;
-}
-input[type='submit']:hover {
-  background-color: #0e2f28;
 }
 
 footer nav ul {
   display: flex;
   justify-content: flex-end;
-  padding: 20px 0;
+  margin: 2em;
 }
 
-/********************** CATEGORIES **********************/
 .categories {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 50px;
 }
 .filter-btn {
   padding: 9px 10px;
@@ -226,7 +229,44 @@ footer nav ul {
   background: #1d6154;
 }
 
-/************* BARRE ADMIN ************/
+/****** FORM LOGIN ******/
+.login {
+  display: flex;
+  flex-direction: column;
+  max-width: 380px;
+  align-items: center;
+  margin: 150px auto 0;
+}
+.login form {
+  display: flex;
+  flex-direction: column;
+  margin: 38px 0 28px;
+  width: 100%;
+}
+.login label {
+  margin-bottom: 7px;
+}
+.login input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding: 0 10px;
+}
+.login:nth-child(1) input {
+  margin-bottom: 15px;
+}
+.login a {
+  text-decoration: underline;
+}
+.login p {
+  color: red;
+}
+.login:nth-child(1) p {
+  margin-bottom: 15px;
+}
+
+/****** BARRE ADMIN ******/
 .admin-header {
   background-color: #000000;
   width: 100%;
