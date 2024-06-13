@@ -130,13 +130,18 @@ li:hover {
 #introduction p {
   margin-bottom: 0.5em;
 }
-#portfolio h2 {
-  text-align: center;
-  padding-top: 90px;
-  margin-bottom: 50px;
-}
+
 .projet-title {
   display: flex;
+  padding: 90px 0 50px;
+  justify-content: center;
+}
+.projet-edit {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: 30px;
+  cursor: pointer;
 }
 
 .gallery {

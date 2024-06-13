@@ -93,17 +93,20 @@ function adminMode() {
   const categories = document.querySelector('.categories');
   const adminHeader = document.querySelector('.admin-header');
   const header = document.querySelector('header');
+  const editBtn = document.querySelector('.projet-edit');
 
   if (localStorage.getItem('token')) {
     categories.style.display = 'none';
     logBtn.innerText = 'logout';
     adminHeader.style.display = 'flex';
     header.style.paddingTop = '106px';
+    editBtn.style.display = 'flex';
   } else {
     categories.style.display = 'flex';
     logBtn.innerText = 'login';
     adminHeader.style.display = 'none';
     header.style.paddingTop = '50px';
+    editBtn.style.display = 'none';
   }
 }
 adminMode();
