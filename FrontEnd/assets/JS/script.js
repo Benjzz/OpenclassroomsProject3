@@ -113,6 +113,7 @@ function adminMode() {
 }
 adminMode();
 
+// MODAL
 let modal = null;
 
 function openModal(e) {
@@ -125,7 +126,6 @@ function openModal(e) {
     i.addEventListener('click', closeModal);
   });
   modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
-
   modalDisplay();
 }
 
@@ -159,15 +159,37 @@ async function modalDisplay() {
   works.forEach((work) => {
     const modalWork = document.createElement('figure');
     const workImage = document.createElement('img');
-    const trashCan = document.createElement('i');
+    const deleteBtn = document.createElement('i');
 
-    trashCan.id = work.id;
-    trashCan.classList.add('fa-solid', 'fa-trash-can');
+    deleteBtn.id = work.id;
+    deleteBtn.classList.add('fa-solid', 'fa-trash-can');
     workImage.src = work.imageUrl;
     workImage.alt = work.title;
     modalWork.className = 'modalWork';
 
+    deleteBtn.addEventListener('click', async (event) => {
+      const workId = event.target.id;
+      await deleteWork(workId);
+      modalDisplay(); // Refresh the modal gallery after deletion
+    });
+
     modalGallery.appendChild(modalWork);
-    modalWork.append(workImage, trashCan);
+    modalWork.append(workImage, deleteBtn);
   });
+}
+
+async function deleteWork(id) {
+  const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
+
+  if (response.ok) {
+    console.log(`Work with id ${id} has been deleted`);
+  } else {
+    console.error(`Failed to delete work with id ${id}`);
+  }
 }
