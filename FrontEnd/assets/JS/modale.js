@@ -1,11 +1,40 @@
-const editBtn = document.querySelector('.projet-edit');
-const modalContainer = document.querySelector('.modal');
-const btnCloseModal = document.getElementById('closeModal');
+// let modal = null;
 
-editBtn.addEventListener('click', () => {
-  modalContainer.style.display = 'flex';
-});
+// function openModal(e) {
+//   e.preventDefault();
+//   const target = document.querySelector(e.target.getAttribute('href'));
+//   target.style.display = null;
+//   modal = target;
+//   modal.addEventListener('click', closeModal);
+//   modal.querySelectorAll('.js-modal-close').forEach((i) => {
+//     i.addEventListener('click', closeModal);
+//   });
+//   modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+//   console.log(e.target.getAttribute('href'));
+// }
 
-btnCloseModal.addEventListener('click', () => {
-  modalContainer.style.display = 'none';
-});
+// function openModal2(e) {
+//   e.preventDefault();
+// }
+
+// function closeModal(e) {
+//   if (modal === null) return;
+//   e.preventDefault();
+//   modal.style.display = 'none';
+//   modal.removeEventListener('click', closeModal);
+//   modal.querySelectorAll('.js-modal-close').forEach((i) => {
+//     i.removeEventListener('click', closeModal);
+//   });
+//   modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation);
+//   modal = null;
+// }
+
+// function stopPropagation(e) {
+//   e.stopPropagation();
+// }
+
+// window.addEventListener('keydown', function (e) {
+//   if (e.key === 'Escape') {
+//     closeModal(e);
+//   }
+// });

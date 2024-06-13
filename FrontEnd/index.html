@@ -19,22 +19,22 @@
     <aside class="admin-header" style="display: flex">
       <p class="edit-mode"><i class="fa-regular fa-pen-to-square"></i>Mode édition</p>
     </aside>
-    <aside class="modal" style="display: none">
-      <div class="modal-wrapper" id="deleteGallery">
-        <div class="modal-icons"><i class="fa-solid fa-xmark" id="closeModal"></i></div>
+    <aside class="modal" id="modal1" style="display: none" aria-hidden="true">
+      <div class="modal-wrapper js-modal-stop" id="deleteGallery">
+        <div class="modal-icons"><i class="fa-solid fa-xmark js-modal-close"></i></div>
         <div class="modal-content">
           <h2 class="modal-title">Galerie photo</h2>
           <div class="modal-gallery">
             <!-- Ajout des projects de facon dynamique -->
           </div>
           <div class="form-line"></div>
-          <button class="modal-btn">Ajouter une photo</button>
+          <a href="#modal2" class="modal-btn button modal2">Ajouter une photo</a>
         </div>
       </div>
     </aside>
-    <aside class="modal" style="display: none">
-      <div class="modal-wrapper" id="addWork" style="display: block">
-        <div class="modal-icons"><i class="fa-solid fa-arrow-left"></i><i class="fa-solid fa-xmark"></i></div>
+    <aside class="modal" id="modal2" style="display: none">
+      <div class="modal-wrapper js-modal-stop" id="addWork">
+        <div class="modal-icons"><i class="fa-solid fa-arrow-left"></i><i class="fa-solid fa-xmark js-modal-close"></i></div>
         <h2 class="modal-title">Ajout photo</h2>
         <div class="modal-content">
           <form action="">
@@ -49,7 +49,7 @@
             <label for="selectCategory">Catégorie</label>
             <select name="selectCategory" id="selectCategory"></select>
             <div class="form-line"></div>
-            <input type="submit" value="Valider" />
+            <input type="submit" value="Valider" class="button modal-btn" />
           </form>
         </div>
       </div>
@@ -83,8 +83,10 @@
       </section>
       <section id="portfolio">
         <div class="projet-title">
-          <h2>Mes Projets</h2>
-          <p class="projet-edit" style="display: none"><i class="fa-regular fa-pen-to-square"></i> modifier</p>
+          <h2>
+            Mes Projets
+            <a href="#modal1" class="projet-edit" style="display: none"><i class="fa-regular fa-pen-to-square"></i> modifier</a>
+          </h2>
         </div>
 
         <div class="categories">
@@ -102,7 +104,7 @@
           <input type="email" name="email" id="email" />
           <label for="message">Message</label>
           <textarea name="message" id="message" cols="30" rows="10"></textarea>
-          <input type="submit" value="Envoyer" />
+          <input type="submit" value="Envoyer" class="button" />
         </form>
       </section>
     </main>

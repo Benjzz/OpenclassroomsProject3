@@ -23,15 +23,15 @@ async function displayWorks() {
   });
 }
 
-async function createWork(work) {
+async function createWork(data) {
   const workElement = document.createElement('figure');
-  workElement.dataset.category = work.categoryId;
+  workElement.dataset.category = data.categoryId;
 
   const imageElement = document.createElement('img');
-  imageElement.src = work.imageUrl;
-  imageElement.alt = work.title;
+  imageElement.src = data.imageUrl;
+  imageElement.alt = data.title;
   const titleElement = document.createElement('figcaption');
-  titleElement.innerText = work.title;
+  titleElement.innerText = data.title;
 
   gallery.appendChild(workElement);
   workElement.appendChild(imageElement);
@@ -101,6 +101,8 @@ function adminMode() {
     adminHeader.style.display = 'flex';
     header.style.paddingTop = '106px';
     editBtn.style.display = 'flex';
+
+    editBtn.addEventListener('click', openModal);
   } else {
     categories.style.display = 'flex';
     logBtn.innerText = 'login';
@@ -110,3 +112,62 @@ function adminMode() {
   }
 }
 adminMode();
+
+let modal = null;
+
+function openModal(e) {
+  e.preventDefault();
+  const target = document.querySelector(e.target.getAttribute('href'));
+  target.style.display = null;
+  modal = target;
+  modal.addEventListener('click', closeModal);
+  modal.querySelectorAll('.js-modal-close').forEach((i) => {
+    i.addEventListener('click', closeModal);
+  });
+  modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+
+  modalDisplay();
+}
+
+function closeModal(e) {
+  if (modal === null) return;
+  e.preventDefault();
+  modal.style.display = 'none';
+  modal.removeEventListener('click', closeModal);
+  modal.querySelectorAll('.js-modal-close').forEach((i) => {
+    i.removeEventListener('click', closeModal);
+  });
+  modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation);
+  modal = null;
+}
+
+function stopPropagation(e) {
+  e.stopPropagation();
+}
+
+window.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    closeModal(e);
+  }
+});
+
+async function modalDisplay() {
+  const works = await getWorks();
+  const modalGallery = document.querySelector('.modal-gallery');
+  modalGallery.innerHTML = '';
+
+  works.forEach((work) => {
+    const modalWork = document.createElement('figure');
+    const workImage = document.createElement('img');
+    const trashCan = document.createElement('i');
+
+    trashCan.id = work.id;
+    trashCan.classList.add('fa-solid', 'fa-trash-can');
+    workImage.src = work.imageUrl;
+    workImage.alt = work.title;
+    modalWork.className = 'modalWork';
+
+    modalGallery.appendChild(modalWork);
+    modalWork.append(workImage, trashCan);
+  });
+}

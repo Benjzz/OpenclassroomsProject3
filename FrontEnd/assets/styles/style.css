@@ -136,11 +136,19 @@ li:hover {
   padding: 90px 0 50px;
   justify-content: center;
 }
+.projet-title h2 {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 .projet-edit {
+  position: absolute;
+  left: calc(100% + 31px);
+  font-family: 'Work sans';
+  font-weight: 400;
+  font-size: 14px;
   display: flex;
   gap: 10px;
-  align-items: center;
-  margin-left: 30px;
   cursor: pointer;
 }
 
@@ -187,7 +195,8 @@ li:hover {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type='submit'] {
+.button {
+  cursor: pointer;
   font-family: 'Syne';
   font-weight: 700;
   color: white;
@@ -196,6 +205,10 @@ input[type='submit'] {
   width: 180px;
   text-align: center;
   border-radius: 60px;
+}
+.button:hover {
+  background: #0e2f28;
+  color: white;
 }
 
 footer nav ul {
