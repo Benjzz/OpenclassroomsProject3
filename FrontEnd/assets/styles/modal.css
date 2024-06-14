@@ -34,14 +34,21 @@
 }
 
 .modal-title {
+  font-family: 'Work sans';
+  font-weight: 400;
+  color: black;
+  font-size: 26px;
   margin-bottom: 46px;
 }
-.fa-xmark {
+.fa-xmark,
+.fa-arrow-left {
   position: absolute;
-  right: 0;
   margin: 26px 30px;
   font-size: 1.2rem;
   cursor: pointer;
+}
+.fa-xmark {
+  right: 0;
 }
 .form-line {
   width: 100%;
@@ -50,11 +57,11 @@
   margin: 67px 0 38px;
 }
 .modal-btn {
+  margin: 0;
   padding: 10px 50px;
   border-radius: 60px;
-  background-color: #1d6154;
-  color: white;
   cursor: pointer;
+  width: auto;
 }
 
 .modal-gallery {
@@ -78,4 +85,66 @@
   font-size: 0.65rem;
   padding: 3.5px 4px;
   cursor: pointer;
+}
+
+/* ADD PICTURES */
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.add-picture {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #e8f1f6;
+  padding: 13px 0 19px;
+  margin-bottom: 30px;
+}
+#pictureDisplay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 169px;
+  background: #e8f1f6;
+  margin-bottom: 30px;
+}
+.add-picture .button {
+  color: #306685;
+  background: #cbd6dc;
+  padding: 10px;
+  margin: 7px;
+}
+.add-picture p {
+  font-size: 10px;
+}
+.fa-image {
+  font-size: 60px;
+  color: #b9c5cc;
+  margin: 5px;
+}
+
+.modal form .line {
+  margin: 47px 0 32px;
+}
+
+#selectCategory,
+#titleForm {
+  height: 51px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  color: #444444;
+  padding: 0 16px;
+  margin-top: 10px;
+}
+
+#titleForm {
+  margin-bottom: 21px;
+}
+
+#modal2 input[type='submit'] {
+  background: #a7a7a7;
+  width: 237px;
 }

@@ -27,29 +27,34 @@
             <!-- Ajout des projects de facon dynamique -->
           </div>
           <div class="form-line"></div>
-          <a href="#modal2" class="modal-btn button modal2">Ajouter une photo</a>
+          <button class="modal-btn button add-picture">Ajouter une photo</button>
         </div>
       </div>
     </aside>
-    <aside class="modal" id="modal2" style="display: none">
+    <aside class="modal" id="modal2" style="display: flex">
       <div class="modal-wrapper js-modal-stop" id="addWork">
         <div class="modal-icons"><i class="fa-solid fa-arrow-left"></i><i class="fa-solid fa-xmark js-modal-close"></i></div>
-        <h2 class="modal-title">Ajout photo</h2>
         <div class="modal-content">
+          <h2 class="modal-title">Ajout photo</h2>
           <form action="">
-            <div class="add-work">
+            <div class="add-picture">
               <i class="fa-regular fa-image"></i>
-              <label for="file">+ Ajouter photo</label>
+              <label for="file" class="button">+ Ajouter photo</label>
               <input type="file" id="file" value="" style="display: none" aria-hidden="true" accept=".png, .jpg" required />
               <p>jpg, png : 4mo max</p>
             </div>
-            <label for="title">Titre</label>
-            <input type="text" id="title" name="title" required />
+            <div id="pictureDisplay" style="display: none">
+              <img src="#" alt="votre image" id="pictureDisplayImg" />
+            </div>
+            <label for="titleForm">Titre</label>
+            <input type="text" id="titleForm" name="titleForm" required />
             <label for="selectCategory">Catégorie</label>
-            <select name="selectCategory" id="selectCategory"></select>
+            <select name="selectCategory" id="selectCategory">
+              <option value="sss">sss</option>
+            </select>
             <div class="form-line"></div>
-            <input type="submit" value="Valider" class="button modal-btn" />
           </form>
+          <input type="submit" value="Valider" class="button modal-btn" />
         </div>
       </div>
     </aside>

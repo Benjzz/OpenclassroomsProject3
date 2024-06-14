@@ -94,6 +94,8 @@ function adminMode() {
   const adminHeader = document.querySelector('.admin-header');
   const header = document.querySelector('header');
   const editBtn = document.querySelector('.projet-edit');
+  const addPicture = document.querySelector('.add-picture');
+  const btnReturnModal = document.querySelector('.fa-arrow-left');
 
   if (localStorage.getItem('token')) {
     categories.style.display = 'none';
@@ -103,12 +105,18 @@ function adminMode() {
     editBtn.style.display = 'flex';
 
     editBtn.addEventListener('click', openModal);
+    addPicture.addEventListener('click', openModal2);
+    btnReturnModal.addEventListener('click', openModal);
   } else {
     categories.style.display = 'flex';
     logBtn.innerText = 'login';
     adminHeader.style.display = 'none';
     header.style.paddingTop = '50px';
     editBtn.style.display = 'none';
+
+    editBtn.removeEventListener('click', openModal);
+    addPicture.removeEventListener('click', openModal2);
+    btnReturnModal.removeEventListener('click', openModal());
   }
 }
 adminMode();
@@ -118,20 +126,18 @@ let modal = null;
 
 function openModal(e) {
   e.preventDefault();
-  const target = document.querySelector(e.target.getAttribute('href'));
-  target.style.display = null;
-  modal = target;
+  closeModal();
+  const modal1 = document.getElementById('modal1');
+  modal1.style.display = null;
+  modal = modal1;
   modal.addEventListener('click', closeModal);
-  modal.querySelectorAll('.js-modal-close').forEach((i) => {
-    i.addEventListener('click', closeModal);
-  });
+  modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
   modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
   modalDisplay();
 }
 
 function closeModal(e) {
   if (modal === null) return;
-  e.preventDefault();
   modal.style.display = 'none';
   modal.removeEventListener('click', closeModal);
   modal.querySelectorAll('.js-modal-close').forEach((i) => {
@@ -170,7 +176,8 @@ async function modalDisplay() {
     deleteBtn.addEventListener('click', async (event) => {
       const workId = event.target.id;
       await deleteWork(workId);
-      modalDisplay(); // Refresh the modal gallery after deletion
+      displayWorks();
+      modalDisplay();
     });
 
     modalGallery.appendChild(modalWork);
@@ -178,8 +185,8 @@ async function modalDisplay() {
   });
 }
 
-async function deleteWork(id) {
-  const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+async function deleteWork(data) {
+  const response = await fetch(`http://localhost:5678/api/works/${data}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -188,8 +195,35 @@ async function deleteWork(id) {
   });
 
   if (response.ok) {
-    console.log(`Work with id ${id} has been deleted`);
+    alert(`Work with id ${data} has been deleted`);
   } else {
-    console.error(`Failed to delete work with id ${id}`);
+    alert(`Failed to delete work with id ${data}`);
+  }
+}
+
+function openModal2(e) {
+  closeModal();
+  const modal2 = document.getElementById('modal2');
+  modal2.style.display = null;
+  modal = modal2;
+  modal.addEventListener('click', closeModal);
+  modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
+  modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+}
+
+function formValidation(image, title, categoryId) {
+  if (image == undefined) {
+    alert('Veuillez ajouter une image');
+    return false;
+  }
+  if (title.length == 0) {
+    alert('Veuillez ajouter un titre');
+    return false;
+  }
+  if (categoryId == '') {
+    alert('Veuillez choisir une catégorie');
+    return false;
+  } else {
+    return true;
   }
 }
