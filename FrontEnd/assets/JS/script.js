@@ -1,21 +1,21 @@
-// Recuperation du container
+// Récupération du container
 const gallery = document.querySelector('.gallery');
 
-// Recuperation des projets
+// Récupération des projets
 async function getWorks() {
   const reponse = await fetch('http://localhost:5678/api/works');
   return await reponse.json();
 }
 getWorks();
 
-// Recuperation des categories
+// Récupération des catégories
 async function getCategories() {
   const reponse = await fetch('http://localhost:5678/api/categories');
   return await reponse.json();
 }
 getCategories();
 
-// Affichage des projects //
+// Affichage des projets
 async function displayWorks() {
   const works = await getWorks();
   works.forEach((work) => {
@@ -38,7 +38,7 @@ async function createWork(data) {
   workElement.appendChild(titleElement);
 }
 
-// Affichage des categories
+// Affichage des catégories
 async function displayCategory() {
   const categories = await getCategories();
 
@@ -94,7 +94,7 @@ function adminMode() {
   const adminHeader = document.querySelector('.admin-header');
   const header = document.querySelector('header');
   const editBtn = document.querySelector('.projet-edit');
-  const addPicture = document.querySelector('.add-picture');
+  const addPicture = document.querySelector('.add-picture-btn');
   const btnReturnModal = document.querySelector('.fa-arrow-left');
 
   if (localStorage.getItem('token')) {
@@ -107,6 +107,7 @@ function adminMode() {
     editBtn.addEventListener('click', openModal);
     addPicture.addEventListener('click', openModal2);
     btnReturnModal.addEventListener('click', openModal);
+    addFormCategory();
   } else {
     categories.style.display = 'flex';
     logBtn.innerText = 'login';
@@ -143,6 +144,7 @@ function closeModal(e) {
   modal.querySelectorAll('.js-modal-close').forEach((i) => {
     i.removeEventListener('click', closeModal);
   });
+  pictureRemove();
   modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation);
   modal = null;
 }
@@ -195,9 +197,9 @@ async function deleteWork(data) {
   });
 
   if (response.ok) {
-    alert(`Work with id ${data} has been deleted`);
+    alert(`Le projet ${data} a été supprimé`);
   } else {
-    alert(`Failed to delete work with id ${data}`);
+    alert(`Echec de la suppression du projet ${data}`);
   }
 }
 
@@ -209,21 +211,90 @@ function openModal2(e) {
   modal.addEventListener('click', closeModal);
   modal.querySelector('.js-modal-close').addEventListener('click', closeModal);
   modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+
+  const pictureInput = document.querySelector('#file');
+  pictureInput.onchange = picturePreview;
+
+  document.querySelector('#valider').addEventListener('click', postPictureSubmit);
+}
+
+async function addFormCategory() {
+  const categories = await getCategories();
+  const selectCategory = document.getElementById('selectCategory');
+  selectCategory.innerHTML = '';
+
+  let option = document.createElement('option');
+  selectCategory.appendChild(option);
+
+  categories.forEach((category) => {
+    option = document.createElement('option');
+    option.value = category.id;
+    option.innerText = category.name;
+    selectCategory.appendChild(option);
+  });
+}
+
+const pictureDisplay = document.querySelector('#pictureDisplay');
+const pictureDisplayImg = document.querySelector('#pictureDisplayImg');
+
+function picturePreview(event) {
+  const pictureInput = event.target;
+  const [file] = pictureInput.files;
+  if (file) {
+    pictureDisplayImg.src = URL.createObjectURL(file);
+    pictureDisplay.style.display = 'flex';
+    document.querySelector('.add-picture').style.display = 'none';
+  }
+}
+
+function pictureRemove() {
+  pictureDisplayImg.src = '';
+  pictureDisplay.style.display = 'none';
+  document.querySelector('.add-picture').style.display = 'flex';
+}
+
+function postPictureSubmit(e) {
+  e.preventDefault();
+  postPicture();
+}
+
+async function postPicture() {
+  const selectCategory = document.getElementById('selectCategory');
+
+  const title = document.getElementById('titleForm').value;
+  const categoryId = selectCategory.value;
+  const image = document.getElementById('file').files[0];
+
+  let check = formValidation(image, title, categoryId);
+  if (check === true) {
+    const formData = new FormData();
+    formData.append('image', image);
+    formData.append('title', title);
+    formData.append('category', categoryId);
+
+    const response = await fetch('http://localhost:5678/api/works', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: formData,
+    });
+
+    if (response.ok) {
+      alert('Le projet a été ajouté avec succès');
+      displayWorks();
+      closeModal();
+    } else {
+      alert("Échec de l'ajout du projet");
+    }
+  }
 }
 
 function formValidation(image, title, categoryId) {
-  if (image == undefined) {
-    alert('Veuillez ajouter une image');
+  if (!image || !title || !categoryId) {
+    alert('Veuillez remplir tous les champs.');
     return false;
   }
-  if (title.length == 0) {
-    alert('Veuillez ajouter un titre');
-    return false;
-  }
-  if (categoryId == '') {
-    alert('Veuillez choisir une catégorie');
-    return false;
-  } else {
-    return true;
-  }
+
+  return true;
 }

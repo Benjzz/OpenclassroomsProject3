@@ -148,3 +148,6 @@
   background: #a7a7a7;
   width: 237px;
 }
+#pictureDisplayImg {
+  max-height: 100%;
+}

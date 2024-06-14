@@ -27,11 +27,11 @@
             <!-- Ajout des projects de facon dynamique -->
           </div>
           <div class="form-line"></div>
-          <button class="modal-btn button add-picture">Ajouter une photo</button>
+          <button class="modal-btn button add-picture-btn">Ajouter une photo</button>
         </div>
       </div>
     </aside>
-    <aside class="modal" id="modal2" style="display: flex">
+    <aside class="modal" id="modal2" style="display: none">
       <div class="modal-wrapper js-modal-stop" id="addWork">
         <div class="modal-icons"><i class="fa-solid fa-arrow-left"></i><i class="fa-solid fa-xmark js-modal-close"></i></div>
         <div class="modal-content">
@@ -49,12 +49,10 @@
             <label for="titleForm">Titre</label>
             <input type="text" id="titleForm" name="titleForm" required />
             <label for="selectCategory">Catégorie</label>
-            <select name="selectCategory" id="selectCategory">
-              <option value="sss">sss</option>
-            </select>
+            <select name="selectCategory" id="selectCategory"></select>
             <div class="form-line"></div>
           </form>
-          <input type="submit" value="Valider" class="button modal-btn" />
+          <input type="submit" value="Valider" id="valider" class="button modal-btn" />
         </div>
       </div>
     </aside>
