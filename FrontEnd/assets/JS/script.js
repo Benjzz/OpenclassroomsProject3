@@ -6,14 +6,12 @@ async function getWorks() {
   const reponse = await fetch('http://localhost:5678/api/works');
   return await reponse.json();
 }
-getWorks();
 
 // Récupération des catégories
 async function getCategories() {
   const reponse = await fetch('http://localhost:5678/api/categories');
   return await reponse.json();
 }
-getCategories();
 
 // Affichage des projets
 async function displayWorks() {
@@ -23,6 +21,7 @@ async function displayWorks() {
   });
 }
 
+// Création d'un projet
 async function createWork(data) {
   const workElement = document.createElement('figure');
   workElement.dataset.category = data.categoryId;
@@ -215,7 +214,9 @@ function openModal2(e) {
   const pictureInput = document.querySelector('#file');
   pictureInput.onchange = picturePreview;
 
-  document.querySelector('#valider').addEventListener('click', postPictureSubmit);
+  const btnValider = document.getElementById('valider');
+  btnValider.style.background = '#a7a7a7';
+  btnValider.addEventListener('click', postPictureSubmit);
 }
 
 async function addFormCategory() {
@@ -244,10 +245,13 @@ function picturePreview(event) {
     pictureDisplayImg.src = URL.createObjectURL(file);
     pictureDisplay.style.display = 'flex';
     document.querySelector('.add-picture').style.display = 'none';
+
+    document.getElementById('valider').style.background = '#1d6154';
   }
 }
 
 function pictureRemove() {
+  document.getElementById('file').value = '';
   pictureDisplayImg.src = '';
   pictureDisplay.style.display = 'none';
   document.querySelector('.add-picture').style.display = 'flex';
@@ -265,8 +269,7 @@ async function postPicture() {
   const categoryId = selectCategory.value;
   const image = document.getElementById('file').files[0];
 
-  let check = formValidation(image, title, categoryId);
-  if (check === true) {
+  if (formValidation(image, title, categoryId) === true) {
     const formData = new FormData();
     formData.append('image', image);
     formData.append('title', title);
