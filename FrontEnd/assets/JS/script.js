@@ -20,6 +20,7 @@ async function displayWorks() {
     createWork(work);
   });
 }
+displayWorks();
 
 // Création d'un projet
 async function createWork(data) {
@@ -52,6 +53,7 @@ async function displayCategory() {
     categoriesContainer.appendChild(btnCategory);
   });
 }
+displayCategory();
 
 // Filtre des projets
 async function filterCategories() {
@@ -80,9 +82,6 @@ async function filterCategories() {
     });
   });
 }
-
-displayWorks();
-displayCategory();
 filterCategories();
 
 // Changement admin
