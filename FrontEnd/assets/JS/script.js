@@ -85,7 +85,6 @@ async function filterCategories() {
 filterCategories();
 
 // Changement admin
-
 function adminMode() {
   const logBtn = document.querySelector('.log-btn');
   const categories = document.querySelector('.categories');
@@ -115,7 +114,7 @@ function adminMode() {
 
     editBtn.removeEventListener('click', openModal);
     addPicture.removeEventListener('click', openModal2);
-    btnReturnModal.removeEventListener('click', openModal());
+    btnReturnModal.removeEventListener('click', openModal);
   }
 }
 adminMode();

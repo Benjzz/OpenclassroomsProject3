@@ -10,8 +10,7 @@ const loginError = document.querySelector('.loginError');
 function logout() {
   if (localStorage.getItem('token')) {
     localStorage.removeItem('token');
-
-    loginError.innerText = 'Vous avez été déconnecté';
+    window.location.href = 'index.html';
   }
 }
 logout();
