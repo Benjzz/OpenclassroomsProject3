@@ -16,6 +16,7 @@ async function getCategories() {
 // Affichage des projets
 async function displayWorks() {
   const works = await getWorks();
+  gallery.innerHTML = '';
   works.forEach((work) => {
     createWork(work);
   });
@@ -235,6 +236,17 @@ async function addFormCategory() {
 
 const pictureDisplay = document.querySelector('#pictureDisplay');
 const pictureDisplayImg = document.querySelector('#pictureDisplayImg');
+
+const fileInput = document.getElementById('file');
+const maxSize = 4 * 1024 * 1024;
+
+fileInput.addEventListener('change', (event) => {
+  const file = event.target.files[0];
+  if (file.size > maxSize) {
+    alert('Le fichier dépasse la taille maximale autorisée de 4 Mo.');
+    fileInput.value = '';
+  }
+});
 
 function picturePreview(event) {
   const pictureInput = event.target;
